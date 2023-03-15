@@ -23,6 +23,16 @@ public class LoginPage {
         return this;
     }
 
+    public LoginPage submeterfomularioDeLoginInvalido(){
+        navegador.findElement(By.cssSelector("button[type='submit']")).click();
+
+        return this;
+    }
+
+    public String capturarMensagemDeInconsistencia(){
+        return navegador.findElement(By.cssSelector(".toast.rounded")).getText();
+    }
+
     public ListaDeProdutosPage submeterFormularioDeLogin(){
         navegador.findElement(By.cssSelector("button[type='submit']")).click();
         return new ListaDeProdutosPage(navegador);

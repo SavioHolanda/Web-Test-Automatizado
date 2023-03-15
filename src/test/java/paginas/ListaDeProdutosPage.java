@@ -10,6 +10,10 @@ public class ListaDeProdutosPage {
         this.navegador = navagador;
     }
 
+    public String validarLoginComSucesso(){
+        return navegador.findElement(By.linkText("Boas vindas, admin!")).getText();
+    }
+
     public FormularioDeAdicaoDeProdutoPage acessarFormularioAdicaoNovoProduto(){
         navegador.findElement(By.linkText("ADICIONAR PRODUTO")).click();
 
