@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import paginas.ListaDeProdutosPage;
 import paginas.LoginPage;
 
 import java.time.Duration;
@@ -25,7 +26,7 @@ public class ProdutosTest {
         this.navegador.get("http://165.227.93.41/lojinha-web/v2/");
     }
     @Test
-    @DisplayName("Nao e permitido registrear um produto igual a zero")
+    @DisplayName("Nao e permitido registrar um produto igual a zero")
     public void testNaoEPermitidoResgistrarProdutoComValorIgualAZero(){
         String mensagemApresentada = new LoginPage(navegador)
                 .informarOUsuario("admin")
@@ -76,8 +77,8 @@ public class ProdutosTest {
 
     @Test
     @DisplayName("Posso adicionar produto que estejam no limite de 7.000,00")
-    public void testPssoAdicionarProdutoQueestejamNoLimiteDeSeteMilReais(){
-        String mensagemApresnetada = new LoginPage(navegador)
+    public void testPossoAdicionarProdutoQueEstejamNoLimiteDeSeteMilReais(){
+        String mensagemApresentada = new LoginPage(navegador)
                 .informarOUsuario("admin")
                 .informarASenha("admin")
                 .submeterFormularioDeLogin()
@@ -87,7 +88,7 @@ public class ProdutosTest {
                 .informarCoresDoProduto("azul")
                 .submeterFormularioDeAdicaoComSucesso()
                 .capturarMensagemApresetada();
-        Assertions.assertEquals("Produto adicionado com sucesso", mensagemApresnetada);
+        Assertions.assertEquals("Produto adicionado com sucesso", mensagemApresentada);
     }
     @Test
     @DisplayName("Fazer logoff do sistema")
@@ -97,6 +98,29 @@ public class ProdutosTest {
                 .informarASenha("admin")
                 .submeterFormularioDeLogin()
                 .botaoDeLogoff();
+    }
+
+    @Test
+    @DisplayName("Editar um produto")
+    public void testEditarUmProduto(){
+        String mensagemApresentada = new LoginPage(navegador)
+                .informarOUsuario("admin")
+                .informarASenha("admin")
+                .submeterFormularioDeLogin()
+                .acessarFormularioAdicaoNovoProduto()
+                .informarNomeDoProduto("TesteEditarProduto")
+                .informarValorDoProduto("700000")
+                .informarCoresDoProduto("azul")
+                .submeterFormularioDeAdicaoComSucesso()
+                .voltarPagaAPaginaListaDeProdutos()
+                .clicarNoProdutoParaEditar()
+                .informarAlteracaoDoNomeDoProduto("TesteFoiEditado")
+                .informarAlteracaoDoValorDoProduto("1000")
+                .informarAlteracaoDasCoresDoProduto("Vermelho, azul")
+                .submeterFormularioDeEdicaoComSucesso()
+                 .capturarMensagemApresetada();
+
+       Assertions.assertEquals("Produto alterado com sucesso", mensagemApresentada);
     }
 
     @AfterEach

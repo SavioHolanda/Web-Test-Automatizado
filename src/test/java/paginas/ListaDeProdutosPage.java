@@ -29,4 +29,9 @@ public class ListaDeProdutosPage {
 
         return new LoginPage(navegador);
     }
+
+    public FormularioDeEdicaoDoProdutoPage clicarNoProdutoParaEditar(){
+        navegador.findElement(By.linkText("TesteEditarProduto")).click();
+        return new FormularioDeEdicaoDoProdutoPage(navegador);
+    }
 }

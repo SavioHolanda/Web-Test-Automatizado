@@ -28,8 +28,8 @@ public class LoginTest {
     @DisplayName("Digitar usuario e senha invalidos")
     public void testDigitarUsuarioESenhaInvalidos (){
         String mensagemApresentada = new LoginPage(navegador)
-                .informarOUsuario("jose")
-                .informarASenha("123")
+                .informarOUsuario("admin")
+                .informarASenha("a")
                 .submeterfomularioDeLoginInvalido()
                 .capturarMensagemDeInconsistencia();
 
@@ -55,6 +55,18 @@ public class LoginTest {
                  .informarASenha("admin")
                  .submeterFormularioDeLogin()
                  .validarLoginComSucesso();
+    }
+
+    @Test
+    @DisplayName("Digitar usuário e senha em branco")
+    public void testDigitarUsuarioESenhaEmBranco(){
+        String mensagemApresentada =  new LoginPage(navegador)
+                .informarOUsuario(" ")
+                .informarASenha(" ")
+                .submeterfomularioDeLoginInvalido()
+                .capturarMensagemDeInconsistencia();
+
+        Assertions.assertEquals("Falha ao fazer o login", mensagemApresentada);
     }
 
     @AfterEach
