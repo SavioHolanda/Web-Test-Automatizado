@@ -89,6 +89,15 @@ public class ProdutosTest {
                 .capturarMensagemApresetada();
         Assertions.assertEquals("Produto adicionado com sucesso", mensagemApresnetada);
     }
+    @Test
+    @DisplayName("Fazer logoff do sistema")
+    public void testFazerLogoffDoSistema(){
+        new LoginPage(navegador)
+                .informarOUsuario("admin")
+                .informarASenha("admin")
+                .submeterFormularioDeLogin()
+                .botaoDeLogoff();
+    }
 
     @AfterEach
     public void afterEach(){

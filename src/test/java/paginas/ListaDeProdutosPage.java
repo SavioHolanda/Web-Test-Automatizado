@@ -23,4 +23,10 @@ public class ListaDeProdutosPage {
     public String capturarMensagemApresetada(){
         return navegador.findElement((By.cssSelector(".toast.rounded"))).getText();
     }
+
+    public LoginPage botaoDeLogoff(){
+        navegador.findElement(By.linkText("Sair")).click();
+
+        return new LoginPage(navegador);
+    }
 }
