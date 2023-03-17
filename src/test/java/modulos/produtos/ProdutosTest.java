@@ -101,8 +101,8 @@ public class ProdutosTest {
     }
 
     @Test
-    @DisplayName("Editar um produto")
-    public void testEditarUmProduto(){
+    @DisplayName("Editar um produto com dados valido")
+    public void testEditarUmProdutoComDadosValdidos(){
         String mensagemApresentada = new LoginPage(navegador)
                 .informarOUsuario("admin")
                 .informarASenha("admin")
@@ -118,9 +118,33 @@ public class ProdutosTest {
                 .informarAlteracaoDoValorDoProduto("1000")
                 .informarAlteracaoDasCoresDoProduto("Vermelho, azul")
                 .submeterFormularioDeEdicaoComSucesso()
-                 .capturarMensagemApresetada();
+                .capturarMensagemApresetada();
 
        Assertions.assertEquals("Produto alterado com sucesso", mensagemApresentada);
+    }
+
+    @Test
+    @DisplayName("Editar um produto com dados invalidos")
+    public void testEditarUmProdutoComDadosInvalidos(){
+        String mensagemApresentada;
+        mensagemApresentada = new LoginPage(navegador)
+                .informarOUsuario("admin")
+                .informarASenha("admin")
+                .submeterFormularioDeLogin()
+                .acessarFormularioAdicaoNovoProduto()
+                .informarNomeDoProduto("TesteEditarProduto")
+                .informarValorDoProduto("700000")
+                .informarCoresDoProduto("azul")
+                .submeterFormularioDeAdicaoComSucesso()
+                .voltarPagaAPaginaListaDeProdutos()
+                .clicarNoProdutoParaEditar()
+                .informarAlteracaoDoNomeDoProduto("TesteFoiEditado")
+                .informarAlteracaoDoValorDoProduto("0")
+                .informarAlteracaoDasCoresDoProduto("Vermelho, azul")
+                .submeterFormularioDeEdicaoComErro()
+                .capturarMensagemApresetada();
+
+        Assertions.assertEquals("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00", mensagemApresentada);
     }
 
     @AfterEach

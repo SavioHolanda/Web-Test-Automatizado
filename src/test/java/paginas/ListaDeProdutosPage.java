@@ -34,4 +34,14 @@ public class ListaDeProdutosPage {
         navegador.findElement(By.linkText("TesteEditarProduto")).click();
         return new FormularioDeEdicaoDoProdutoPage(navegador);
     }
+
+    // Verificar um medoto para exclusão dos produtos criados
+
+/*    public ListaDeProdutosPage excluirProdutoCadastrado(){
+        String URL = navegador.getCurrentUrl();
+        String codigoProduto = URL.substring(52,58);
+        navegador.navigate().to("http://165.227.93.41/lojinha-web/v2//produto/remover/"+codigoProduto);
+
+        return this;
+    }*/
 }

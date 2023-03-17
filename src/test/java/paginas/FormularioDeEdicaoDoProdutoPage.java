@@ -43,15 +43,15 @@ public class FormularioDeEdicaoDoProdutoPage {
         return this;
     }
 
-    public ListaDeProdutosPage submeterFormularioDeEdicaoComErro(){
-        navegador.findElement(By.cssSelector("button[type='submit']")).click();
-
-        return new ListaDeProdutosPage(navegador);
-    }
-
     public FormularioDeEdicaoDoProdutoPage submeterFormularioDeEdicaoComSucesso(){
         navegador.findElement(By.cssSelector("button[type='submit']")).click();
 
         return this;
+    }
+
+    public ListaDeProdutosPage submeterFormularioDeEdicaoComErro(){
+        navegador.findElement(By.cssSelector("button[type='submit']")).click();
+
+        return new ListaDeProdutosPage(navegador);
     }
 }
